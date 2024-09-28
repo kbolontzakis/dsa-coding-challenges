@@ -26,7 +26,7 @@ Welcome to the **DSA-Coding-Challenges** repository! This repository contains a 
    git clone https://github.com/kbolontzakis/DSA-Coding-Challenges.git
    ```
 
-2. Explore the coding challenges in the `src/challenges/` directory and the data structures and algorithms implementations in the `src/dsa/` directory.
+2. Explore the coding challenges in the `src/Challenges/` directory and the data structures and algorithms implementations in the `src/Dsa/` directory.
 
 3. You can add your own solutions or attempt the existing challenges. Feel free to contribute!
 
