@@ -30,7 +30,7 @@ class StringHelper
                 $result[$index] .= $string[$i];
                 continue;
             }
-            
+
             // If separator, do not concatenate
             // and the next character will go to a new placeholder
             $index++;
