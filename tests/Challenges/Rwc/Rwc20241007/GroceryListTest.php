@@ -13,9 +13,9 @@ class GroceryListTest extends TestCase
         $recipe = ['eggs', 'flour', 'sugar', 'butter'];
 
         $groceryList = new GroceryList($recipe, [
-            new PantryItem(1,  'sugar', new DateTime('+5 days')),
-            new PantryItem(2,  'butter', new DateTime('+5 days')),
-            new PantryItem(3,  'milk', new DateTime('+5 days'))
+            new PantryItem(1, 'sugar', new DateTime('+5 days')),
+            new PantryItem(2, 'butter', new DateTime('+5 days')),
+            new PantryItem(3, 'milk', new DateTime('+5 days'))
         ]);
 
         $this->assertCount(
@@ -25,9 +25,9 @@ class GroceryListTest extends TestCase
         );
 
         $groceryList = new GroceryList($recipe, [
-            new PantryItem(1,  'sugar', new DateTime('+5 days')),
-            new PantryItem(2,  'butter', new DateTime('-5 days')),
-            new PantryItem(3,  'milk', new DateTime('+5 days'))
+            new PantryItem(1, 'sugar', new DateTime('+5 days')),
+            new PantryItem(2, 'butter', new DateTime('-5 days')),
+            new PantryItem(3, 'milk', new DateTime('+5 days'))
         ]);
 
         $this->assertCount(
