@@ -12,8 +12,9 @@ class GroceryList
     ) {
     }
 
-    public function getMissingPantryIngredients(): array
+    public function countMissingPantryIngredients(): int
     {
+        // Create index of existing (not-expired) pantry items
         $index = [];
 
         foreach ($this->pantryItems as $pantryItem) {
@@ -22,14 +23,21 @@ class GroceryList
             }
         }
 
-        $missingItems = [];
+        $missingPantryIngredients = [];
 
         foreach ($this->recipe as $recipeIngredient) {
-            if (!isset($index[$recipeIngredient]) && !in_array($recipeIngredient, $missingItems)) {
-                $missingItems[] = $recipeIngredient;
+            if (
+                // Existing pantry item, ready to be used
+                isset($index[$recipeIngredient]) ||
+                // Already in the grocery list
+                in_array($recipeIngredient, $missingPantryIngredients)
+            ) {
+                continue;
             }
+
+            $missingPantryIngredients[] = $recipeIngredient;
         }
 
-        return $missingItems;
+        return count($missingPantryIngredients);
     }
 }

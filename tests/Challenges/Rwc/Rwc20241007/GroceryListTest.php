@@ -18,9 +18,9 @@ class GroceryListTest extends TestCase
             new PantryItem(3, 'milk', new DateTime('+5 days'))
         ]);
 
-        $this->assertCount(
+        $this->assertSame(
             2, 
-            $groceryList->getMissingPantryIngredients(),
+            $groceryList->countMissingPantryIngredients(),
             'Count of missing ingredients should be the expected, if all ingredients have not expired yet.'
         );
 
@@ -30,9 +30,9 @@ class GroceryListTest extends TestCase
             new PantryItem(3, 'milk', new DateTime('+5 days'))
         ]);
 
-        $this->assertCount(
+        $this->assertSame(
             3, 
-            $groceryList->getMissingPantryIngredients(),
+            $groceryList->countMissingPantryIngredients(),
             'Count of missing ingredients should be the expected, if one ingredient has expired.'
         );
     }

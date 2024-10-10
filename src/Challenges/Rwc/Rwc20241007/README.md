@@ -43,8 +43,9 @@ class GroceryList
     ) {
     }
 
-    public function getMissingPantryIngredients(): array
+    public function countMissingPantryIngredients(): int
     {
+        // Create index of existing (not-expired) pantry items
         $index = [];
 
         foreach ($this->pantryItems as $pantryItem) {
@@ -53,15 +54,22 @@ class GroceryList
             }
         }
 
-        $missingItems = [];
+        $missingPantryIngredients = [];
 
         foreach ($this->recipe as $recipeIngredient) {
-            if (!isset($index[$recipeIngredient]) && !in_array($recipeIngredient, $missingItems)) {
-                $missingItems[] = $recipeIngredient;
+            if (
+                // Existing pantry item, ready to be used
+                isset($index[$recipeIngredient]) ||
+                // Already in the grocery list
+                in_array($recipeIngredient, $missingPantryIngredients)
+            ) {
+                continue;
             }
+
+            $missingPantryIngredients[] = $recipeIngredient;
         }
 
-        return $missingItems;
+        return count($missingPantryIngredients);
     }
 }
 ```
@@ -87,9 +95,9 @@ class GroceryListTest extends TestCase
             new PantryItem(3, 'milk', new DateTime('+5 days'))
         ]);
 
-        $this->assertCount(
+        $this->assertSame(
             2, 
-            $groceryList->getMissingPantryIngredients(),
+            $groceryList->countMissingPantryIngredients(),
             'Count of missing ingredients should be the expected, if all ingredients have not expired yet.'
         );
 
@@ -99,11 +107,12 @@ class GroceryListTest extends TestCase
             new PantryItem(3, 'milk', new DateTime('+5 days'))
         ]);
 
-        $this->assertCount(
+        $this->assertSame(
             3, 
-            $groceryList->getMissingPantryIngredients(),
+            $groceryList->countMissingPantryIngredients(),
             'Count of missing ingredients should be the expected, if one ingredient has expired.'
         );
     }
 }
+
 ```
