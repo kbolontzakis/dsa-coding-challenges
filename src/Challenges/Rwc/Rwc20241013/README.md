@@ -34,7 +34,9 @@ class SvgHelper
     {
         $svgWidth = $center[0] * 2;
         $svgHeight = $center[1] * 2;
-        return "<svg width='$svgWidth' height='$svgHeight'><circle cx='{$center[0]}' cy='{$center[1]}' r='$radius' fill='$color'/></svg>";
+        return "<svg width='$svgWidth' height='$svgHeight'>" .
+            "<circle cx='{$center[0]}' cy='{$center[1]}' r='$radius' fill='$color'/>" .
+            "</svg>";
     }
 }
 ```
